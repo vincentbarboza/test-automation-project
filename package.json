@@ -1,0 +1,20 @@
+{
+  "name": "test-automation-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Test automation project with Vendure as the initial application under test.",
+  "scripts": {
+    "app:dev": "npm --prefix vendure-app run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincentbarboza/test-automation-project.git"
+  },
+  "keywords": [],
+  "author": "Vinnie Barboza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincentbarboza/test-automation-project/issues"
+  },
+  "homepage": "https://github.com/vincentbarboza/test-automation-project#readme"
+}
