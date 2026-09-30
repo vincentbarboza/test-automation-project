@@ -2,11 +2,16 @@
 
 This project was generated with `@vendure/create`.
 
-## Project Layout
+## Workspace Layout
 
-- Custom backend code belongs in `src/plugins`
-- Runtime configuration is in `src/vendure-config.ts`
-- Static assets and email templates live in `static`
+- Vendure backend: `apps/server`
+- Next.js storefront: `apps/storefront`
+- Start both apps: `npm run dev`
+- Start only the server: `npm run dev:server`
+- Start only the storefront: `npm run dev:storefront`
+- Backend custom code belongs in `apps/server/src/plugins`
+- Backend runtime configuration is in `apps/server/src/vendure-config.ts`
+- Backend static assets and email templates live in `apps/server/static`
 
 ## Vendure Development
 
