@@ -7,3 +7,5 @@ node_modules
 # Local SQLite database
 apps/server/vendure.sqlite
 apps/server/vendure.sqlite-*
+apps/server/src/gql/graphql-env.d.ts
+apps/server/src/gql/graphql.ts
