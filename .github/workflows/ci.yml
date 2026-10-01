@@ -4,9 +4,27 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   codeQuality:
     uses: ./.github/workflows/code-quality.yml
 
   e2e:
     uses: ./.github/workflows/playwright.yml
+
+  deployReport:
+    name: Deploy Playwright Report
+    needs: e2e
+    if: always()
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+
+    steps:
+      - name: Deploy Playwright report
+        uses: actions/deploy-pages@v4
