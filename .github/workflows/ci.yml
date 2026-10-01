@@ -7,5 +7,5 @@ jobs:
   codeQuality:
     uses: ./.github/workflows/code-quality.yml
 
-  playwright:
+  E2E:
     uses: ./.github/workflows/playwright.yml
