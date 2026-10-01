@@ -1,13 +1,13 @@
-name: Playwright Tests
+name: Playwright
 
 on:
-  push:
+  workflow_call:
 
 jobs:
   e2e:
     name: Playwright E2E
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - name: Checkout repository

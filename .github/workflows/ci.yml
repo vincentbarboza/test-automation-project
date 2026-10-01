@@ -1,0 +1,11 @@
+name: CI
+
+on:
+  push:
+
+jobs:
+  codeQuality:
+    uses: ./.github/workflows/codeQuality.yml
+
+  playwright:
+    uses: ./.github/workflows/playwright.yml
