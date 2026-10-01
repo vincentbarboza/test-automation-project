@@ -9,7 +9,8 @@
     "pw:ui": "playwright test --ui",
     "pw:report": "playwright show-report",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "typeCheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
