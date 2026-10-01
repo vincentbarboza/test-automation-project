@@ -43,10 +43,6 @@ jobs:
         if: steps.playwrightCache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
 
-      - name: Install Playwright system dependencies
-        if: steps.playwrightCache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
-
       - name: Start Vendure
         run: |
           npm run app:dev > vendure.log 2>&1 &
@@ -77,9 +73,3 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-
-      - name: Upload Playwright report for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        if: ${{ !cancelled() }}
-        with:
-          path: playwright-report/
