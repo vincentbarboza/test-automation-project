@@ -5,7 +5,7 @@ on:
 
 jobs:
   codeQuality:
-    uses: ./.github/workflows/codeQuality.yml
+    uses: ./.github/workflows/code-quality.yml
 
   playwright:
     uses: ./.github/workflows/playwright.yml
