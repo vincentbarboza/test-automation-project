@@ -1,0 +1,12 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  codeQuality:
+    uses: ./.github/workflows/code-quality.yml
+
+  e2e:
+    uses: ./.github/workflows/playwright.yml
