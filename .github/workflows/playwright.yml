@@ -30,6 +30,27 @@ jobs:
 
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
+      
+      - name: Start Vendure
+        run: |
+          npm run app:dev > vendure.log 2>&1 &
+          echo $! > vendure.pid  
+
+      - name: Wait for Vendure
+        run: |
+          for i in {1..60}; do
+            if curl -f http://localhost:3001; then
+              echo "Vendure is ready"
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "Vendure failed to start"
+          cat vendure.log
+          exit 1
+
 
       - name: Run Playwright tests
         run: npm run pw:test
