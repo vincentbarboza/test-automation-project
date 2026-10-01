@@ -21,6 +21,8 @@ export default defineConfig({
   url: 'http://localhost:3001',
   reuseExistingServer: !isCI,
   timeout: 120_000,
+  stdout: 'pipe',
+  stderr: 'pipe',
 },
   projects: [
     {
