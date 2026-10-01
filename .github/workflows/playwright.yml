@@ -28,13 +28,29 @@ jobs:
       - name: Install Vendure dependencies
         run: npm ci --prefix vendure-app
 
+      - name: Get Playwright version
+        id: playwrightVersion
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: playwrightCache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwrightVersion.outputs.version }}
+
       - name: Install Playwright browser
+        if: steps.playwrightCache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
-      
+
+      - name: Install Playwright system dependencies
+        if: steps.playwrightCache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
       - name: Start Vendure
         run: |
           npm run app:dev > vendure.log 2>&1 &
-          echo $! > vendure.pid  
+          echo $! > vendure.pid
 
       - name: Wait for Vendure
         run: |
@@ -50,7 +66,6 @@ jobs:
           echo "Vendure failed to start"
           cat vendure.log
           exit 1
-
 
       - name: Run Playwright tests
         run: npm run pw:test
