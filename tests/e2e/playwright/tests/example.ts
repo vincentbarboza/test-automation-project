@@ -3,7 +3,7 @@ import { expect } from '@playwright/test';
 import testDataLoader from '@vincent/test-data-loader';
 import ExampleData from '../lib/type/exampleData';
 
-const exampleData = testDataLoader<ExampleData>('/haha/');
+const exampleData = testDataLoader<ExampleData>('/');
 
 test('Example Test', async ({ page }) => {
   await page.goto('/');
