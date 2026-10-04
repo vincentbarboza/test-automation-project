@@ -9,7 +9,7 @@ Before submitting, run:
 ```bash
 npm run upgrade:validate
 npm test
-npm run lint
+npm run pw:lint
 npm run check-types
 npm run build
 ```

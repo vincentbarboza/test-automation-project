@@ -1,4 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
+import testDataLoader from '@vincent/test-data-loader';
+
+testDataLoader.config({
+  dataTargets: ['en', 'de'],
+  dataPath: './tests/e2e/playwright/testData',
+});
 
 const isCI = !!process.env.CI
 export default defineConfig({
@@ -26,7 +32,7 @@ export default defineConfig({
     },
   projects: [
     {
-      name: 'chromium',
+      name: `Chromium ${process.env.dataTarget}`,
       use: { ...devices['Desktop Chrome'] },
     },
   ],

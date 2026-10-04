@@ -1,9 +1,12 @@
-import { test } from '@playwright/test';
+import { test } from '../fixture/base';
+import { expect } from '@playwright/test';
+import testDataLoader from '@vincent/test-data-loader';
+import ExampleData from '../lib/type/exampleData';
 
-test('has title', async ({ page }) => {
-  await page.goto('/');
-});
+const exampleData = testDataLoader<ExampleData>('/');
 
-test('get started link', async ({ page }) => {
+test('Example Test', async ({ page }) => {
   await page.goto('/');
+
+  await expect(page.locator('h1')).toHaveText(exampleData.title);
 });

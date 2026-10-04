@@ -22,7 +22,7 @@ jobs:
       - if: github.event_name != 'pull_request'
         run: npm run upgrade:validate
       - run: npm test
-      - run: npm run lint
+      - run: npm run pw:lint
       - run: npm run check-types
       - run: npm run build
         env:
