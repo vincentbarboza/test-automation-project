@@ -133,7 +133,7 @@ Run the same checks used by CI before submitting a change:
 ```bash
 npm run upgrade:validate
 npm test
-npm run lint
+run: npm run pw:lint
 npm run check-types
 npm run build
 ```
