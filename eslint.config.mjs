@@ -1,8 +1,7 @@
-// @ts-check
-
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import playwright from 'eslint-plugin-playwright';
+import stylistic from '@stylistic/eslint-plugin';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 
@@ -16,6 +15,7 @@ export default tseslint.config(
       'test-results/',
       'playwright-report/',
       'blob-report/',
+      'packages/**/dist/**',
     ],
   },
 
@@ -27,6 +27,9 @@ export default tseslint.config(
       ...tseslint.configs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
     ],
+    plugins: {
+      '@stylistic': stylistic,
+    },
     languageOptions: {
       parserOptions: {
         project: './tsconfig.json',
@@ -34,6 +37,8 @@ export default tseslint.config(
       },
     },
     rules: {
+      '@stylistic/semi': ['error', 'always'],
+
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
