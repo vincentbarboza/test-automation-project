@@ -18,6 +18,8 @@ jobs:
 
     env:
       dataTarget: ${{ matrix.dataTarget }}
+      VENDURE_SHOP_API_URL: http://localhost:3000/shop-api
+      NEXT_PUBLIC_VENDURE_SHOP_API_URL: http://localhost:3000/shop-api
 
     steps:
       - name: Checkout repository
@@ -75,6 +77,10 @@ jobs:
 
       - name: Run Playwright tests
         run: npm run pw:test
+
+      - name: Print Vendure logs on failure
+        if: failure()
+        run: cat vendure.log
 
       - name: Upload Playwright report artifact
         uses: actions/upload-artifact@v4
