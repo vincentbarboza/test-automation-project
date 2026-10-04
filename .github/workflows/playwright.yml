@@ -61,15 +61,15 @@ jobs:
       - name: Wait for Vendure
         run: |
           for i in {1..60}; do
-            if curl -f http://localhost:3001; then
-              echo "Vendure is ready"
+            if curl -f "http://localhost:3001/${dataTarget}/"; then
+              echo "Vendure is ready for ${dataTarget}"
               exit 0
             fi
 
             sleep 2
           done
 
-          echo "Vendure failed to start"
+          echo "Vendure failed to start for ${dataTarget}"
           cat vendure.log
           exit 1
 
