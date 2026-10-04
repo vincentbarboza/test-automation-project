@@ -65,16 +65,28 @@ jobs:
 
       - name: Wait for Vendure
         run: |
+          consecutive_successes=0
+
           for i in {1..60}; do
-            if curl -f "http://localhost:3001/${dataTarget}/"; then
-              echo "Vendure is ready for ${dataTarget}"
-              exit 0
+            status=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:3001/${dataTarget}/")
+
+            if [ "$status" = "200" ]; then
+              consecutive_successes=$((consecutive_successes + 1))
+              echo "Vendure returned 200 (${consecutive_successes}/3)"
+
+              if [ "$consecutive_successes" -ge 3 ]; then
+                echo "Vendure is ready for ${dataTarget}"
+                exit 0
+              fi
+            else
+              consecutive_successes=0
+              echo "Vendure returned ${status}, waiting..."
             fi
 
             sleep 2
           done
 
-          echo "Vendure failed to start for ${dataTarget}"
+          echo "Vendure failed to become stable for ${dataTarget}"
           cat vendure.log
           exit 1
 
