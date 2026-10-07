@@ -23,17 +23,17 @@ export function LanguagePicker() {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant="ghost" size="sm" className="gap-1.5" />}>
+            <DropdownMenuTrigger render={<Button data-test="navbar-language-button" variant="ghost" size="sm" className="gap-1.5" />}>
                 <Globe className="size-4" />
                 <span>{localeNames[locale as keyof typeof localeNames] ?? locale.toUpperCase()}</span>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent data-test="navbar-language-options" align="end">
                 {routing.locales.map((loc) => (
-                    <DropdownMenuItem
+                    <DropdownMenuItem  data-test={`navbar-${loc}-option`}
                         key={loc}
                         onClick={() => handleLocaleChange(loc)}
                     >
-                        <span>{localeNames[loc] ?? loc.toUpperCase()}</span>
+                        <span data-test={`navbar-${loc}-option-label`}>{localeNames[loc] ?? loc.toUpperCase()}</span>
                         {locale === loc && <span className="ml-auto text-xs">✓</span>}
                     </DropdownMenuItem>
                 ))}

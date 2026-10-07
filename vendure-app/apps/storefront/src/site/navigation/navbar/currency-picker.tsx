@@ -36,18 +36,19 @@ export function CurrencyPicker({availableCurrencyCodes, activeCurrencyCode}: Cur
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger render={<Button variant="ghost" size="sm" className="gap-1.5" aria-label={t('switchCurrency')} />}>
+            <DropdownMenuTrigger render={<Button data-test="navbar-currency-button" variant="ghost" size="sm" className="gap-1.5" aria-label={t('switchCurrency')} />}>
                 <Coins className="size-4" />
                 <span>{activeCurrencyCode}</span>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent data-test="navbar-currency-options" align="end">
                 {availableCurrencyCodes.map((code) => (
                     <DropdownMenuItem
                         key={code}
+                        data-test={`navbar-${code}-option`}
                         onClick={() => handleCurrencyChange(code)}
                         disabled={isPending}
                     >
-                        <span>{code}</span>
+                        <span data-test={`navbar-${code}-option-label`}>{code}</span>
                         {activeCurrencyCode === code && <span className="ml-auto text-xs">✓</span>}
                     </DropdownMenuItem>
                 ))}
