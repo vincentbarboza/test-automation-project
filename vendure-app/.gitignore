@@ -5,6 +5,7 @@ node_modules
 .DS_Store
 
 # Local SQLite database
+apps/server/vendure.sqlite
 apps/server/vendure.sqlite-*
 
 # Generated GraphQL files

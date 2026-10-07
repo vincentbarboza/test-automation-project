@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
                 hostname: 'localhost',
             },
             {
-                hostname: 'wwwmy-shop.com',
+                hostname: 'www.my-shop.com',
             },
         ],
     },
