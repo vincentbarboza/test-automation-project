@@ -8,6 +8,6 @@ const headerItesmsTestData: HeaderItemsTestData = {
         { label: 'Home & Garden', url: `/${language}/collection/home-garden` }, 
         { label: 'Sports & Outdoor', url: `/${language}/collection/sports-outdoor` }
     ],
-}
+};
 
 export default headerItesmsTestData;

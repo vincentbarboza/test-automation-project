@@ -37,6 +37,6 @@ test.describe('Header items', () => {
             ]); 
 
             expect(response.status()).toBe(200);
-        })
+        });
     }
 });
