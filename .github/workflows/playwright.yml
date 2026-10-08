@@ -43,6 +43,17 @@ jobs:
       - name: Install Vendure dependencies
         run: npm ci --prefix vendure-app
 
+      - name: Download Vendure sample data
+        run: |
+          npm pack @vendure/create@3.7.3 --pack-destination "$RUNNER_TEMP"
+          mkdir -p "$RUNNER_TEMP/vendure-create"
+          tar -xzf "$RUNNER_TEMP/vendure-create-3.7.3.tgz" -C "$RUNNER_TEMP/vendure-create" package/assets
+
+      - name: Populate Vendure sample data
+        env:
+          VENDURE_FACTORY_ASSETS_DIR: ${{ runner.temp }}/vendure-create/package/assets
+        run: npm run seed:e2e --prefix vendure-app
+
       - name: Get Playwright version
         id: playwrightVersion
         run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
