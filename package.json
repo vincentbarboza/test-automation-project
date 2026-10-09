@@ -2,9 +2,6 @@
   "name": "test-automation-project",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "description": "Test automation project with Vendure as the initial application under test.",
   "scripts": {
     "app:dev": "npm --prefix vendure-app run dev",
@@ -31,6 +28,7 @@
     "@playwright/test": "^1.63.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^26.6.3",
+    "@vincent/test-data-loader": "github:vincentbarboza/test-data-loader",
     "eslint": "^10.11.0",
     "eslint-plugin-playwright": "^2.12.0",
     "typescript": "^5.9.3",

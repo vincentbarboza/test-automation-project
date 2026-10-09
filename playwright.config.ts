@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 import testDataLoader from '@vincent/test-data-loader';
+import { resolve } from 'node:path';
+
+const projectRoot = __dirname;
+const vendureRoot = resolve(projectRoot, 'vendure-app');
 
 testDataLoader.config({
   dataTargets: ['en', 'de'],
@@ -18,6 +22,7 @@ export default defineConfig({
   ],
   use: {
     baseURL: 'http://localhost:3001',
+    actionTimeout: 5_000,
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
@@ -25,7 +30,8 @@ export default defineConfig({
   webServer: isCI
   ? undefined
   : {
-      command: 'npm run app:dev',
+      command: 'npm run dev',
+      cwd: vendureRoot,
       url: 'http://localhost:3001',
       reuseExistingServer: true,
       timeout: 120_000,
