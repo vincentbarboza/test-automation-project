@@ -1,4 +1,7 @@
 export default interface HeaderItemsTestData {
-    language: string;
+    languageCode: string;
+    languageName: string;
+    optionSelectedText: string;
+    availableLanguages: { code: string; name: string }[];
     menuItems: { label: string; url: string }[];
 }

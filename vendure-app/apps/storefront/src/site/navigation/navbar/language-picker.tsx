@@ -23,9 +23,11 @@ export function LanguagePicker() {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger render={<Button data-test="navbar-language-button" variant="ghost" size="sm" className="gap-1.5" />}>
+            <DropdownMenuTrigger render={<Button data-test={`navbar-language-button-${localeNames[locale as keyof typeof localeNames] ?? locale.toUpperCase()}`} variant="ghost" size="sm" className="gap-1.5" />}>
                 <Globe className="size-4" />
-                <span>{localeNames[locale as keyof typeof localeNames] ?? locale.toUpperCase()}</span>
+                <span data-test={`navbar-language-label-${localeNames[locale as keyof typeof localeNames] ?? locale.toUpperCase()}`}>
+                    {localeNames[locale as keyof typeof localeNames] ?? locale.toUpperCase()}
+                </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent data-test="navbar-language-options" align="end">
                 {routing.locales.map((loc) => (
@@ -34,7 +36,7 @@ export function LanguagePicker() {
                         onClick={() => handleLocaleChange(loc)}
                     >
                         <span data-test={`navbar-${loc}-option-label`}>{localeNames[loc] ?? loc.toUpperCase()}</span>
-                        {locale === loc && <span className="ml-auto text-xs">✓</span>}
+                        {locale === loc && <span data-test={`navbar-${loc}-option-selected`} className="ml-auto text-xs">✓</span>}
                     </DropdownMenuItem>
                 ))}
             </DropdownMenuContent>
