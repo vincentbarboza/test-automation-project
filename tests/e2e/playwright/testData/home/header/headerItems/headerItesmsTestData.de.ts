@@ -1,13 +1,14 @@
+import config from "../../../../lib/config/config";
 import HeaderItemsTestData from "../../../../lib/type/home/header/headerItesmsTestData";
 
-const languageCode = 'de';  
+const languageCode = config.languageCode;  
+const germanLanguage = config.germanLanguage;
+const englishLanguage = config.englishLanguage;
+
 const headerItesmsTestData: HeaderItemsTestData = {
     languageCode: languageCode,
     languageName: 'Deutsch',
-    availableLanguages: [
-        { code: 'de', name: 'Deutsch' },
-        { code: 'en', name: 'English' },
-    ],
+    availableLanguages: [germanLanguage, englishLanguage],
     optionSelectedText: '✓',
     menuItems: [
         { label: 'Electronics', url: `/${languageCode}/collection/electronics` }, 
