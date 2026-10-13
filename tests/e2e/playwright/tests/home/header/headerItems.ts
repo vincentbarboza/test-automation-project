@@ -69,5 +69,5 @@ test.describe('Header items', () => {
             await page.locator(selectors.languageButton(language.name)).click();
             await expect(page.locator(selectors.navbarOptionSelected(language.code))).toHaveText(headerItesmsTestData.optionSelectedText);
         }
-    })
+    });
 });
