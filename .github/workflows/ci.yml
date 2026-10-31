@@ -8,5 +8,8 @@ jobs:
   codeQuality:
     uses: ./.github/workflows/code-quality.yml
 
+  api:
+    uses: ./.github/workflows/api.yml
+
   e2e:
-    uses: ./.github/workflows/playwright.yml
+    uses: ./.github/workflows/e2e.yml

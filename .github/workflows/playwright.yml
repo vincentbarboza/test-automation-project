@@ -1,11 +1,11 @@
-name: Playwright
+name: Vendure
 
 on:
   workflow_call:
 
 jobs:
   e2e:
-    name: Playwright - ${{ matrix.dataTarget }}
+    name: Vendure Playwright - ${{ matrix.dataTarget }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
@@ -17,6 +17,7 @@ jobs:
           - de
 
     env:
+      suite: e2e
       dataTarget: ${{ matrix.dataTarget }}
       VENDURE_SHOP_API_URL: 'http://localhost:3000/shop-api'
       NEXT_PUBLIC_VENDURE_SHOP_API_URL: 'http://localhost:3000/shop-api'
@@ -102,7 +103,7 @@ jobs:
           exit 1
 
       - name: Run Playwright tests
-        run: npm run pw:test:${{ matrix.dataTarget }}
+        run: npm run pw:test
 
       - name: Print Vendure logs on failure
         if: failure()
