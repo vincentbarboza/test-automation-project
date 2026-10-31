@@ -5,7 +5,7 @@ on:
 
 jobs:
   API:
-    name: Playwright - Restful Booker API
+    name: Playwright API
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -53,7 +53,7 @@ jobs:
           cat restful-booker.log
           exit 1
 
-      - name: Run Restful Booker API tests
+      - name: Run Playwright API tests
         run: npm run pw:api:booker
 
       - name: Print Restful Booker logs on failure
