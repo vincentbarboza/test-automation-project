@@ -8,8 +8,8 @@ jobs:
   codeQuality:
     uses: ./.github/workflows/code-quality.yml
 
-  restfulBooker:
-    uses: ./.github/workflows/api-booker.yml
+  api:
+    uses: ./.github/workflows/api.yml
 
-  vendurePlaywright:
-    uses: ./.github/workflows/playwright.yml
+  e2e:
+    uses: ./.github/workflows/e2e.yml

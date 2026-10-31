@@ -1,0 +1,8 @@
+name: API
+
+on:
+  workflow_call:
+
+jobs:
+  restfulBooker:
+    uses: ./.github/workflows/api-booker.yml

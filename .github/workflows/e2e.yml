@@ -1,0 +1,8 @@
+name: E2E
+
+on:
+  workflow_call:
+
+jobs:
+  playwright:
+    uses: ./.github/workflows/playwright.yml
