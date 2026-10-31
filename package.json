@@ -5,7 +5,8 @@
   "description": "Test automation project with Vendure as the initial application under test.",
   "scripts": {
     "app:dev": "npm --prefix vendure-app run dev",
-    "pw:test": "playwright test",
+    "pw:test:en": "playwright test --project=\"E2E Vendure Chromium en\"",
+    "pw:test:de": "playwright test --project=\"E2E Vendure Chromium de\"",
     "pw:ui": "playwright test --ui",
     "pw:report": "playwright show-report",
     "pw:lint": "eslint tests/**/*.ts",

@@ -27,19 +27,17 @@ export default defineConfig({
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
   },
-  webServer: isCI
-  ? undefined
-  : {
-      command: 'npm run dev',
-      cwd: vendureRoot,
-      url: 'http://localhost:3001',
-      reuseExistingServer: true,
-      timeout: 120_000,
-    },
   projects: [
     {
-      name: `Chromium ${process.env.dataTarget}`,
+      name: `E2E Vendure Chromium ${process.env.dataTarget}`,
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'API Restful Booeker',
+      use: { baseURL: 'http://localhost:3002' },
+      testDir: './tests/api/playwright/restfulBooker/tests',
+      fullyParallel: true,
+      workers: 4,
     },
   ],
 });

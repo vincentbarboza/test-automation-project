@@ -102,7 +102,7 @@ jobs:
           exit 1
 
       - name: Run Playwright tests
-        run: npm run pw:test
+        run: npm run pw:test:${{ matrix.dataTarget }}
 
       - name: Print Vendure logs on failure
         if: failure()
