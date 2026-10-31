@@ -1,5 +1,6 @@
 ﻿node_modules/
 .next/
+agent-rules.md
 
 # Playwright
 /test-results/

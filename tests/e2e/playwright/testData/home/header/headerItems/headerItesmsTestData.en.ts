@@ -1,12 +1,19 @@
+import config from "../../../../lib/config/config";
 import HeaderItemsTestData from "../../../../lib/type/home/header/headerItesmsTestData";
 
-const language = 'en';  
+const languageCode = config.languageCode;  
+const englishLanguage = config.englishLanguage;
+const germanLanguage = config.germanLanguage;
+
 const headerItesmsTestData: HeaderItemsTestData = {
-    language: language,
+    languageCode: languageCode,
+    languageName: englishLanguage.name,
+    availableLanguages: [englishLanguage, germanLanguage],
+    optionSelectedText: '✓',
     menuItems: [
-        { label: 'Electronics', url: `/${language}/collection/electronics` }, 
-        { label: 'Home & Garden', url: `/${language}/collection/home-garden` }, 
-        { label: 'Sports & Outdoor', url: `/${language}/collection/sports-outdoor` }
+        { label: 'Electronics', url: `/${languageCode}/collection/electronics` }, 
+        { label: 'Home & Garden', url: `/${languageCode}/collection/home-garden` }, 
+        { label: 'Sports & Outdoor', url: `/${languageCode}/collection/sports-outdoor` }
     ],
 };
 
