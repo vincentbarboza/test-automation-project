@@ -1,21 +1,18 @@
 import { defineConfig, devices } from '@playwright/test';
 import testDataLoader from '@vincent/test-data-loader';
-import { resolve } from 'node:path';
+import './tests/e2e/playwright/config/testDataLoader';
+import config from './tests/e2e/playwright/lib/config/config';
 
-const projectRoot = __dirname;
-const vendureRoot = resolve(projectRoot, 'vendure-app');
+// testDataLoader.config({
+//   dataTargets: ['en', 'de'],
+//   dataPath: './tests/e2e/playwright/testData',
+// });
 
-testDataLoader.config({
-  dataTargets: ['en', 'de'],
-  dataPath: './tests/e2e/playwright/testData',
-});
-
-const isCI = !!process.env.CI
 export default defineConfig({
   testDir: './tests/e2e/playwright/tests',
   testMatch: '**/*.ts',
-  forbidOnly: isCI,
-  retries: isCI ? 2 : 0,
+  forbidOnly: config.isCI,
+  retries: config.isCI ? 2 : 0,
   workers: 1,
   reporter: [
     ['html', { open: 'never' }],
@@ -29,12 +26,14 @@ export default defineConfig({
   },
   projects: [
     {
-      name: `E2E Vendure Chromium ${process.env.dataTarget}`,
+      name: 'E2E Vendure Chromium',
       use: { ...devices['Desktop Chrome'] },
     },
     {
-      name: 'API Restful Booeker',
-      use: { baseURL: 'http://localhost:3002' },
+      name: 'API Restful Booker',
+      use: {
+        baseURL: 'http://localhost:3002',
+      },
       testDir: './tests/api/playwright/restfulBooker/tests',
       fullyParallel: true,
       workers: 4,

@@ -17,6 +17,7 @@ jobs:
           - de
 
     env:
+      suite: e2e
       dataTarget: ${{ matrix.dataTarget }}
       VENDURE_SHOP_API_URL: 'http://localhost:3000/shop-api'
       NEXT_PUBLIC_VENDURE_SHOP_API_URL: 'http://localhost:3000/shop-api'
