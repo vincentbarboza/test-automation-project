@@ -1,11 +1,11 @@
-name: Playwright
+name: Vendure
 
 on:
   workflow_call:
 
 jobs:
   e2e:
-    name: Playwright - ${{ matrix.dataTarget }}
+    name: Vendure Playwright - ${{ matrix.dataTarget }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
 

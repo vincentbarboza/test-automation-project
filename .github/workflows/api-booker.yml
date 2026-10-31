@@ -1,11 +1,11 @@
-name: Restful Booker API
+name: Restful Booker
 
 on:
   workflow_call:
 
 jobs:
   API:
-    name: Playwright API
+    name: Restuful Booker Playwright API
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
