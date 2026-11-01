@@ -1,12 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
-import testDataLoader from '@vincent/test-data-loader';
 import './tests/e2e/playwright/config/testDataLoader';
 import config from './tests/e2e/playwright/lib/config/config';
-
-// testDataLoader.config({
-//   dataTargets: ['en', 'de'],
-//   dataPath: './tests/e2e/playwright/testData',
-// });
 
 export default defineConfig({
   testDir: './tests/e2e/playwright/tests',
