@@ -50,7 +50,7 @@ npm ci --prefix restful-booker-app
 Start Vendure in one terminal:
 
 ```powershell
-npm run app:dev
+npm run app:vendure
 ```
 
 In another terminal, select the E2E suite and language, then run the tests:
@@ -58,7 +58,7 @@ In another terminal, select the E2E suite and language, then run the tests:
 ```powershell
 $env:suite = 'e2e'
 $env:dataTarget = 'en' # Use 'de' for German test data
-npm run pw:test
+npm run pw:test:vendure
 ```
 
 ### Restful Booker API
@@ -66,16 +66,14 @@ npm run pw:test
 Start Restful Booker on port `3002`:
 
 ```powershell
-npm ci --prefix restful-booker-app
-$env:PORT = '3002'
-npm start --prefix restful-booker-app
+npm run app:booker
 ```
 
 In another terminal, select and run the API suite:
 
 ```powershell
 $env:suite = 'api'
-npm run pw:api:booker
+npm run pw:test:booker
 ```
 
 ## Other commands

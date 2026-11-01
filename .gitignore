@@ -1,6 +1,7 @@
 ﻿node_modules/
 .next/
 agent-rules.md
+/tests/api/env.api
 
 # Playwright
 /test-results/

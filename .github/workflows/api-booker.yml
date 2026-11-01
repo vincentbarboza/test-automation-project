@@ -2,6 +2,11 @@ name: Restful Booker
 
 on:
   workflow_call:
+    secrets:
+      API_USERNAME:
+        required: true
+      API_PASSWORD:
+        required: true
 
 jobs:
   API:
@@ -10,6 +15,8 @@ jobs:
     timeout-minutes: 15
     env:
       suite: api
+      API_USERNAME: ${{ secrets.API_USERNAME }}
+      API_PASSWORD: ${{ secrets.API_PASSWORD }}
 
     steps:
       - name: Checkout repository
@@ -54,8 +61,8 @@ jobs:
           exit 1
 
       - name: Run Playwright API tests
-        run: npm run pw:api:booker
-
+        run: npm run pw:test:booker
+        
       - name: Print Restful Booker logs on failure
         if: failure()
         run: cat restful-booker.log

@@ -72,7 +72,7 @@ jobs:
 
       - name: Start Vendure
         run: |
-          npm run app:dev > vendure.log 2>&1 &
+          npm run app:vendure > vendure.log 2>&1 &
           echo $! > vendure.pid
 
       - name: Wait for Vendure
@@ -103,7 +103,7 @@ jobs:
           exit 1
 
       - name: Run Playwright tests
-        run: npm run pw:test
+        run: npm run pw:test:vendure
 
       - name: Print Vendure logs on failure
         if: failure()

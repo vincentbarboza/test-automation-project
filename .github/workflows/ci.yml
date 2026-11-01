@@ -10,6 +10,9 @@ jobs:
 
   api:
     uses: ./.github/workflows/api.yml
+    secrets:
+      API_USERNAME: ${{ secrets.API_USERNAME }}
+      API_PASSWORD: ${{ secrets.API_PASSWORD }}
 
   e2e:
     uses: ./.github/workflows/e2e.yml
