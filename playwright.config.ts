@@ -1,12 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
+import testConfig from './tests/testConfig/testConfig';
 import './tests/e2e/playwright/config/testDataLoader';
-import config from './tests/e2e/playwright/lib/config/config';
 
 export default defineConfig({
   testDir: './tests/e2e/playwright/tests',
   testMatch: '**/*.ts',
-  forbidOnly: config.isCI,
-  retries: config.isCI ? 2 : 0,
+  forbidOnly: testConfig.isCI,
+  retries: testConfig.isCI ? 2 : 0,
   workers: 1,
   reporter: [
     ['html', { open: 'never' }],
