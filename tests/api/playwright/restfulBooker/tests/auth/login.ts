@@ -4,7 +4,6 @@ import LoginResponse from '../../lib/type/auth/loginResponse';
 
 test.describe('Login API', () => {
     test('should return a token when valid credentials are provided', async ({ request }) => {
-        console.log(credentials)
         const response = await request.post('/auth', {
             data: credentials
         }); 
