@@ -11,7 +11,7 @@
     "pw:test:vendure": "playwright test --project=\"E2E Vendure Chromium\"",
     "pw:ui:vendure": "playwright test --ui --project=\"E2E Vendure Chromium\"",
     "pw:report": "playwright show-report",
-    "pw:eslint": "eslint tests/**/*.ts",
+    "pw:lint": "eslint tests/**/*.ts",
     "pw:lint:fix": "eslint tests/**/*.ts --fix",
     "typeCheck": "tsc --noEmit"
   },
