@@ -13,6 +13,8 @@
     "pw:report": "playwright show-report",
     "pw:lint": "eslint tests/**/*.ts",
     "pw:lint:fix": "eslint tests/**/*.ts --fix",
+    "artillery:login:local": "artillery run --env-file env.local tests/performance/artillery/load.yml",
+    "artillery:login:ci": "artillery run tests/performance/artillery/load.yml",
     "typeCheck": "tsc --noEmit"
   },
   "repository": {
@@ -32,6 +34,7 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^26.6.3",
     "@vincent/test-data-loader": "github:vincentbarboza/test-data-loader",
+    "artillery": "^2.0.34",
     "eslint": "^10.11.0",
     "eslint-plugin-playwright": "^2.12.0",
     "typescript": "^5.9.3",

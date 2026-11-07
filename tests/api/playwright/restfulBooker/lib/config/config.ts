@@ -1,8 +1,8 @@
 import Credentials from '../type/credentials/credentials.d.ts/credentials';
 import { existsSync } from 'node:fs';
 
-if (existsSync('./tests/api/env.api')) {
-    process.loadEnvFile('./tests/api/env.api');
+if (existsSync('env.local')) {
+    process.loadEnvFile('env.local');
 }
 
 class Config {

@@ -1,0 +1,23 @@
+config:
+  target: "http://localhost:3002"
+
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: CI load test
+
+  plugins:
+    ensure:
+      thresholds:
+        - http.response_time.p95: 500
+        - http.response_time.p99: 1000
+        - http.errors: 0
+
+scenarios:
+  - name: Login
+    flow:
+      - post:
+          url: "/auth"
+          json:
+            username: "{{ $env.API_USERNAME }}"
+            password: "{{ $env.API_PASSWORD }}"
