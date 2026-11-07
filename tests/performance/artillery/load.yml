@@ -11,7 +11,8 @@ config:
       thresholds:
         - http.response_time.p95: 500
         - http.response_time.p99: 1000
-        - http.errors: 0
+      conditions:
+        - expression: "vusers.failed == 0"
 
 scenarios:
   - name: Login
