@@ -1,97 +1,31 @@
-# Test Automation Project
+# Test Automation
 
-A TypeScript and Playwright test automation project covering Vendure storefront end-to-end tests and Restful Booker API tests.
+This is an active test automation project that is continuously developed and expanded. It currently brings together browser-based end-to-end testing, API testing, and performance testing across multiple applications. New test scenarios, applications, and tools will be added as the project grows.
 
-## Test suites
+## What is covered
 
-The Playwright configuration separates tests into two suites:
+### Vendure storefront — Playwright E2E
 
-- **Vendure E2E** — storefront tests, with English (`en`) and German (`de`) test data.
-- **Restful Booker API** — API tests against the local Restful Booker application.
+Browser tests run against the Vendure storefront in English and German. Current coverage checks key header behavior, including the logo, navigation links, and language picker, and verifies that navigation requests return successfully.
 
-The tests and shared support code live under `tests/`:
+### Restful Booker — Playwright API
 
-```text
-tests/
-├── api/playwright/restfulBooker/tests/
-└── e2e/playwright/
-    ├── config/       # Suite selection and test-data loader setup
-    ├── fixture/      # Shared Playwright fixtures
-    ├── lib/          # Configuration and test-data types
-    ├── testData/     # Locale-specific data (en, de)
-    └── tests/        # Vendure storefront tests
-```
+Authentication tests cover both successful and unsuccessful login attempts. They verify that valid credentials return a non-empty token and that invalid or incomplete credentials return the expected error response.
 
-Set the `suite` environment variable before running Playwright:
+### Restful Booker — Artillery performance
 
-- `e2e` selects the Vendure suite and requires `dataTarget` to be `en` or `de`.
-- `api` selects API tests and does not initialize the E2E test-data loader.
+A 60-second login load scenario runs at five virtual users per second. It checks that successful logins return a token, no virtual users fail, the 95th-percentile response time stays below 500 ms, and the 99th percentile stays below 1,000 ms.
 
-The configuration validates `suite`; it does not silently choose a default.
+## Running in CI
 
-## Getting started
+GitHub Actions runs code-quality checks, the Vendure browser suite for both locales, Restful Booker API tests, and the Artillery performance scenario. API and performance run as separate jobs and use a shared Restful Booker setup action. Vendure setup is also reusable by other browser-testing tools.
 
-Install the root test dependencies:
+Playwright and Artillery reports are uploaded as workflow artifacts. Playwright retries failures in CI and retains screenshots, traces, and video for failed tests.
 
-```powershell
-npm ci
-```
+## Tools
 
-Install the Restful Booker application dependencies when running API tests:
-
-```powershell
-npm ci --prefix restful-booker-app
-```
-
-## Running tests locally
-
-### Vendure E2E
-
-Start Vendure in one terminal:
-
-```powershell
-npm run app:vendure
-```
-
-In another terminal, select the E2E suite and language, then run the tests:
-
-```powershell
-$env:suite = 'e2e'
-$env:dataTarget = 'en' # Use 'de' for German test data
-npm run pw:test:vendure
-```
-
-### Restful Booker API
-
-Start Restful Booker on port `3002`:
-
-```powershell
-npm run app:booker
-```
-
-In another terminal, select and run the API suite:
-
-```powershell
-$env:suite = 'api'
-npm run pw:test:booker
-```
-
-## Other commands
-
-```powershell
-npm run pw:lint       # Lint Playwright tests
-npm run typeCheck     # Type-check the project
-npm run pw:report     # Open the HTML Playwright report
-```
-
-## CI
-
-GitHub Actions is defined in `.github/workflows/`. The main `ci.yml` workflow includes code quality, Vendure Playwright, and separate Restful Booker API and Artillery performance jobs. The Restful Booker jobs share `.github/actions/setup-restful-booker`; the Vendure E2E workflow uses `.github/actions/setup-vendure`, which can also be reused by a future Cypress job. Each job runs on an isolated runner, so each starts its own app instance. Configure the `BOKKER_USERNAME` and `BOKKER_PASSWORD` repository secrets. Playwright and Artillery reports are uploaded as workflow artifacts.
-
-## Tech stack
-
-- TypeScript
-- Playwright
-- Node.js
-- ESLint
-- GitHub Actions
+- **Playwright** for browser and API testing
+- **Artillery** for HTTP load testing
+- **TypeScript** for typed test support and configuration
+- **ESLint** and TypeScript checks for code quality
+- **GitHub Actions** for continuous integration
