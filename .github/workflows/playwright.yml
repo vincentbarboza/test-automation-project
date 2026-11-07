@@ -2,6 +2,11 @@ name: Vendure
 
 on:
   workflow_call:
+    secrets:
+      VENDURE_USERNAME:
+        required: true
+      VENDURE_PASSWORD:
+        required: true
 
 jobs:
   e2e:
@@ -21,39 +26,18 @@ jobs:
       dataTarget: ${{ matrix.dataTarget }}
       VENDURE_SHOP_API_URL: 'http://localhost:3000/shop-api'
       NEXT_PUBLIC_VENDURE_SHOP_API_URL: 'http://localhost:3000/shop-api'
-      SUPERADMIN_USERNAME: 'superadmin'
-      SUPERADMIN_PASSWORD: 'superadmin'
+      SUPERADMIN_USERNAME: ${{ secrets.VENDURE_USERNAME }}
+      SUPERADMIN_PASSWORD: ${{ secrets.VENDURE_PASSWORD }}
       COOKIE_SECRET: 'test-cookie-secret'
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Vendure
+        uses: ./.github/actions/setup-vendure
         with:
-          node-version: lts/*
-          cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            vendure-app/package-lock.json
-
-      - name: Install test dependencies
-        run: npm ci
-
-      - name: Install Vendure dependencies
-        run: npm ci --prefix vendure-app
-
-      - name: Download Vendure sample data
-        run: |
-          npm pack @vendure/create@3.7.3 --pack-destination "$RUNNER_TEMP"
-          mkdir -p "$RUNNER_TEMP/vendure-create"
-          tar -xzf "$RUNNER_TEMP/vendure-create-3.7.3.tgz" -C "$RUNNER_TEMP/vendure-create" package/assets
-
-      - name: Populate Vendure sample data
-        env:
-          VENDURE_FACTORY_ASSETS_DIR: ${{ runner.temp }}/vendure-create/package/assets
-        run: npm run seed:e2e --prefix vendure-app
+          data-target: ${{ matrix.dataTarget }}
 
       - name: Get Playwright version
         id: playwrightVersion
@@ -69,38 +53,6 @@ jobs:
       - name: Install Playwright browser
         if: steps.playwrightCache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
-
-      - name: Start Vendure
-        run: |
-          npm run app:vendure > vendure.log 2>&1 &
-          echo $! > vendure.pid
-
-      - name: Wait for Vendure
-        run: |
-          consecutive_successes=0
-
-          for i in {1..60}; do
-            status=$(curl -L -s -o /dev/null -w "%{http_code}" "http://localhost:3001/${dataTarget}/" || true)
-
-            if [ "$status" = "200" ]; then
-              consecutive_successes=$((consecutive_successes + 1))
-              echo "Vendure returned 200 (${consecutive_successes}/3)"
-
-              if [ "$consecutive_successes" -ge 3 ]; then
-                echo "Vendure is ready for ${dataTarget}"
-                exit 0
-              fi
-            else
-              consecutive_successes=0
-              echo "Vendure returned ${status:-no response}, waiting..."
-            fi
-
-            sleep 2
-          done
-
-          echo "Vendure failed to become stable for ${dataTarget}"
-          cat vendure.log
-          exit 1
 
       - name: Run Playwright tests
         run: npm run pw:test:vendure

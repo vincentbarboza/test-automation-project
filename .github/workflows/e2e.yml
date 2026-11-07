@@ -2,7 +2,15 @@ name: E2E
 
 on:
   workflow_call:
+    secrets:
+      VENDURE_USERNAME:
+        required: true
+      VENDURE_PASSWORD:
+        required: true
 
 jobs:
   playwright:
     uses: ./.github/workflows/playwright.yml
+    secrets:
+      VENDURE_USERNAME: ${{ secrets.VENDURE_USERNAME }}
+      VENDURE_PASSWORD: ${{ secrets.VENDURE_PASSWORD }}

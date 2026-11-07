@@ -1,5 +1,5 @@
 import type { APIRequestContext, APIResponse } from '@playwright/test';
-import Credentials from '../../type/credentials/credentials.d.ts/credentials';
+import Credentials from '../../type/credentials/credentials';
 
 export default class AuthService {
     private request: APIRequestContext;

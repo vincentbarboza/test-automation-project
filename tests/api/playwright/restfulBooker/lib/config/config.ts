@@ -1,17 +1,15 @@
-import Credentials from '../type/credentials/credentials.d.ts/credentials';
-import { existsSync } from 'node:fs';
+import loadEnvFile from '../../../../../testConfig/loadEnvFile';
+import Credentials from '../type/credentials/credentials';
 
-if (existsSync('env.local')) {
-    process.loadEnvFile('env.local');
-}
+loadEnvFile();
 
 class Config {
     public readonly credentials: Credentials;
 
     constructor() {
         this.credentials = {
-            username: process.env.API_USERNAME || '',
-            password: process.env.API_PASSWORD || ''
+            username: process.env.BOKKER_USERNAME || '',
+            password: process.env.BOKKER_PASSWORD || ''
         };
     }
 }

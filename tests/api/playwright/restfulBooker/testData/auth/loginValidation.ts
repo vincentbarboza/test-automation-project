@@ -1,5 +1,5 @@
 import credentials from '../../lib/default/defaultCredentials';
-import Credentials from '../../lib/type/credentials/credentials.d.ts/credentials';
+import Credentials from '../../lib/type/credentials/credentials';
 
 const loginValidationCases: { description: string; partialCredentials: Partial<Credentials> }[] = [
     { description: 'credentials are missing', partialCredentials: {} },
