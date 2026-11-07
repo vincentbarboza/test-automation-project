@@ -10,9 +10,11 @@ jobs:
 
   api:
     uses: ./.github/workflows/api.yml
-    secrets:
-      API_USERNAME: ${{ secrets.API_USERNAME }}
-      API_PASSWORD: ${{ secrets.API_PASSWORD }}
+    secrets: inherit
+
+  performance:
+    uses: ./.github/workflows/performance.yml
+    secrets: inherit
 
   e2e:
     uses: ./.github/workflows/e2e.yml

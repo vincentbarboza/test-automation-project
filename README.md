@@ -86,7 +86,7 @@ npm run pw:report     # Open the HTML Playwright report
 
 ## CI
 
-GitHub Actions is defined in `.github/workflows/`. The main `ci.yml` workflow includes code quality, Vendure Playwright, and a separate Restful Booker API workflow.
+GitHub Actions is defined in `.github/workflows/`. The main `ci.yml` workflow includes code quality, Vendure Playwright, Restful Booker API tests, and an Artillery performance test against the local Restful Booker app. Configure the `API_USERNAME` and `API_PASSWORD` repository secrets for the API and performance workflows. The Artillery JSON report is uploaded as a workflow artifact.
 
 ## Tech stack
 
