@@ -13,6 +13,9 @@ config:
         - http.response_time.p99: 1000
       conditions:
         - expression: "vusers.failed == 0"
+    expect:
+      reportFailuresAsErrors: true
+      outputFormat: silent
 
 scenarios:
   - name: Login
@@ -22,3 +25,5 @@ scenarios:
           json:
             username: "{{ $env.API_USERNAME }}"
             password: "{{ $env.API_PASSWORD }}"
+          expect:
+            - hasProperty: token
