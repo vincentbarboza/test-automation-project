@@ -1,5 +1,5 @@
 import config from '../../lib/config/config';
-import Credentials from '../../lib/type/credentials/credentials.d.ts/credentials';
+import Credentials from '../../lib/type/credentials/credentials';
 
 const credentials: Credentials = {
     username: config.credentials.username,

@@ -2,6 +2,7 @@
 .next/
 agent-rules.md
 /tests/api/env.api
+.env.local
 
 # Playwright
 /test-results/

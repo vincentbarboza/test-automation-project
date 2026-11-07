@@ -2,6 +2,11 @@ name: Vendure
 
 on:
   workflow_call:
+    secrets:
+      VENDURE_USERNAME:
+        required: true
+      VENDURE_PASSWORD:
+        required: true
 
 jobs:
   e2e:
@@ -21,8 +26,8 @@ jobs:
       dataTarget: ${{ matrix.dataTarget }}
       VENDURE_SHOP_API_URL: 'http://localhost:3000/shop-api'
       NEXT_PUBLIC_VENDURE_SHOP_API_URL: 'http://localhost:3000/shop-api'
-      SUPERADMIN_USERNAME: 'superadmin'
-      SUPERADMIN_PASSWORD: 'superadmin'
+      SUPERADMIN_USERNAME: ${{ secrets.VENDURE_USERNAME }}
+      SUPERADMIN_PASSWORD: ${{ secrets.VENDURE_PASSWORD }}
       COOKIE_SECRET: 'test-cookie-secret'
 
     steps:

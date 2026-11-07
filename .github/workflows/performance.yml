@@ -3,9 +3,9 @@ name: Performance
 on:
   workflow_call:
     secrets:
-      API_USERNAME:
+      BOKKER_USERNAME:
         required: true
-      API_PASSWORD:
+      BOKKER_PASSWORD:
         required: true
 
 jobs:
@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      API_USERNAME: ${{ secrets.API_USERNAME }}
-      API_PASSWORD: ${{ secrets.API_PASSWORD }}
+      BOKKER_USERNAME: ${{ secrets.BOKKER_USERNAME }}
+      BOKKER_PASSWORD: ${{ secrets.BOKKER_PASSWORD }}
 
     steps:
       - name: Checkout repository
