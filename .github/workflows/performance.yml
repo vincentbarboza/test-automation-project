@@ -21,43 +21,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            restful-booker-app/package-lock.json
-
-      - name: Install test dependencies
-        run: npm ci
-
-      - name: Install Restful Booker dependencies
-        run: npm ci --prefix restful-booker-app
-
-      - name: Start Restful Booker
-        run: |
-          npm run app:booker > restful-booker.log 2>&1 &
-          echo $! > restful-booker.pid
-
-      - name: Wait for Restful Booker
-        run: |
-          for i in {1..30}; do
-            status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3002/ping || true)
-
-            if [ "$status" = "201" ]; then
-              echo "Restful Booker is ready"
-              exit 0
-            fi
-
-            echo "Restful Booker returned ${status:-no response}, waiting..."
-            sleep 2
-          done
-
-          echo "Restful Booker failed to become ready"
-          cat restful-booker.log
-          exit 1
+      - name: Set up Restful Booker
+        uses: ./.github/actions/setup-restful-booker
 
       - name: Run Artillery performance test
         run: npm run artillery:login:ci -- --output artillery-report.json
