@@ -39,7 +39,14 @@ export default tseslint.config(
     },
     rules: {
       '@stylistic/semi': ['error', 'always'],
-
+      '@stylistic/quotes': ['error', 'single'],
+      '@stylistic/indent': ['error', 4],
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+      '@stylistic/object-curly-spacing': ['error', 'always'],
+      '@stylistic/array-bracket-spacing': ['error', 'never'],
+      '@stylistic/space-before-blocks': 'error',
+      '@stylistic/keyword-spacing': 'error',
+      '@stylistic/arrow-spacing': 'error',
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
