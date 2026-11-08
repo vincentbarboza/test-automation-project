@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import loginValidationCases from '../../testData/auth/loginValidation';
+import loginValidationCases from '../../testData/auth/loginValidationData';
 import AuthService from '../../lib/service/auth/authService';
 
 test.describe('Login API Validation', () => {
