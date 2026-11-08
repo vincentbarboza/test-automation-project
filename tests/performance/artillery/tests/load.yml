@@ -15,7 +15,7 @@ config:
         - expression: "vusers.failed == 0"
     expect:
       reportFailuresAsErrors: true
-      outputFormat: silent
+      outputFormat: prettyError
 
 scenarios:
   - name: Login
@@ -27,3 +27,10 @@ scenarios:
             password: "{{ $env.BOOKER_PASSWORD }}"
           expect:
             - hasProperty: token
+            
+  - name: Bookings
+    flow:
+      - get:
+          url: "/booking"
+          expect:
+            - jmespath: "type(@) == 'array'"
