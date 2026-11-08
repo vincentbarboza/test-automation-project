@@ -23,7 +23,7 @@ scenarios:
       - post:
           url: "/auth"
           json:
-            username: "{{ $env.BOKKER_USERNAME }}"
-            password: "{{ $env.BOKKER_PASSWORD }}"
+            username: "{{ $env.BOOKER_USERNAME }}"
+            password: "{{ $env.BOOKER_PASSWORD }}"
           expect:
             - hasProperty: token

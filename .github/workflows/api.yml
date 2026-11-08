@@ -3,14 +3,14 @@ name: API
 on:
   workflow_call:
     secrets:
-      BOKKER_USERNAME:
+      BOOKER_USERNAME:
         required: true
-      BOKKER_PASSWORD:
+      BOOKER_PASSWORD:
         required: true
 
 jobs:
   restfulBooker:
     uses: ./.github/workflows/api-booker.yml
     secrets:
-      BOKKER_USERNAME: ${{ secrets.BOKKER_USERNAME }}
-      BOKKER_PASSWORD: ${{ secrets.BOKKER_PASSWORD }}
+      BOOKER_USERNAME: ${{ secrets.BOOKER_USERNAME }}
+      BOOKER_PASSWORD: ${{ secrets.BOOKER_PASSWORD }}

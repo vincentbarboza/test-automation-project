@@ -3,20 +3,20 @@ name: Restful Booker
 on:
   workflow_call:
     secrets:
-      BOKKER_USERNAME:
+      BOOKER_USERNAME:
         required: true
-      BOKKER_PASSWORD:
+      BOOKER_PASSWORD:
         required: true
 
 jobs:
   API:
-    name: Restuful Booker Playwright API
+    name: Restful Booker Playwright API
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
       suite: api
-      BOKKER_USERNAME: ${{ secrets.BOKKER_USERNAME }}
-      BOKKER_PASSWORD: ${{ secrets.BOKKER_PASSWORD }}
+      BOOKER_USERNAME: ${{ secrets.BOOKER_USERNAME }}
+      BOOKER_PASSWORD: ${{ secrets.BOOKER_PASSWORD }}
 
     steps:
       - name: Checkout repository
