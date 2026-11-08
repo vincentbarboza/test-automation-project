@@ -9,7 +9,7 @@ class Config {
     constructor() {
         this.credentials = {
             username: process.env.BOKKER_USERNAME || '',
-            password: process.env.BOKKER_PASSWORD || ''
+            password: process.env.BOKKER_PASSWORD || '',
         };
     }
 }

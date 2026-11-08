@@ -1,4 +1,4 @@
-import {test, expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import BookingidResponse from '../../lib/type/booking/bookingResponse';
 import bookingid from '../../testData/booking/bookingData';
 import BookingService from '../../lib/service/booking/bookingService';
@@ -6,7 +6,7 @@ import BookingService from '../../lib/service/booking/bookingService';
 const bookingService = new BookingService();
 
 test.describe('Bookings API', () => {
-    test('should GET all bookings', async ({request}) => {
+    test('should GET all bookings', async ({ request }) => {
         const response = await bookingService.booking(request);
         const body = await response.json() as BookingidResponse[];
 

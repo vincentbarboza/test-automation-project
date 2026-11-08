@@ -1,4 +1,4 @@
-import Suite from "./type/suite";
+import Suite from './type/suite';
 
 const suiteConfig = process.env.suite;
 
