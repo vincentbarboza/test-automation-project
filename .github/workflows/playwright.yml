@@ -55,7 +55,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Playwright tests
-        run: npm run pw:test:vendure
+        run: npm run pw:test:vendure:${{ matrix.dataTarget }}
 
       - name: Print Vendure logs on failure
         if: failure()

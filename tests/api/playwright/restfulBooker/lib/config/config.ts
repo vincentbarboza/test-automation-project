@@ -1,4 +1,5 @@
 import loadEnvFile from '../../../../../testConfig/loadEnvFile';
+import getRequiredEnv from '../../../../../testConfig/getRequiredEnv';
 import Credentials from '../type/credentials/credentials';
 
 loadEnvFile();
@@ -8,8 +9,8 @@ class Config {
 
     constructor() {
         this.credentials = {
-            username: process.env.BOKKER_USERNAME || '',
-            password: process.env.BOKKER_PASSWORD || ''
+            username: getRequiredEnv('BOOKER_USERNAME'),
+            password: getRequiredEnv('BOOKER_PASSWORD'),
         };
     }
 }

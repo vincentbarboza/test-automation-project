@@ -12,6 +12,7 @@ export default tseslint.config(
     ignores: [
       'node_modules/',
       'vendure-app/',
+      'restful-booker-app/',
       'test-results/',
       'playwright-report/',
       'blob-report/',
