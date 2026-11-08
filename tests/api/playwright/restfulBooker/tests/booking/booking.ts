@@ -7,7 +7,7 @@ const bookingService = new BookingService();
 
 test.describe('Bookings API', () => {
     test('should GET all bookings', async ({ request }) => {
-        const response = await bookingService.booking(request);
+        const response = await bookingService.getBookings(request);
         const body = await response.json() as BookingidResponse[];
 
         expect(response.status()).toBe(200);
