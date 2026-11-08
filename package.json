@@ -15,8 +15,8 @@
     "pw:report": "playwright show-report",
     "pw:lint": "eslint \"tests/**/*.ts\"",
     "pw:lint:fix": "eslint \"tests/**/*.ts\" --fix",
-    "artillery:login:local": "artillery run --dotenv .env.local tests/performance/artillery/load.yml",
-    "artillery:login:ci": "artillery run tests/performance/artillery/load.yml",
+    "artillery:login:local": "artillery run --dotenv .env.local tests/performance/artillery/tests/load.yml",
+    "artillery:login:ci": "artillery run tests/performance/artillery/tests/load.yml",
     "typeCheck": "tsc --noEmit"
   },
   "repository": {
