@@ -12,15 +12,15 @@ export default class HeaderComponent {
     }
 
     public async clickLogoButton(languageCode: string): Promise<Response> {
-        return this.clickAndWaitForResponse(`/${languageCode}`, this.logoButton);
+        return this.clickAndWaitForResponse({responseUrl: `/${languageCode}`, target: this.logoButton});
     }
 
     public async clickMenuItemButton(responseUrl: string, label: string): Promise<Response> {
-        return this.clickAndWaitForResponse(responseUrl, this.menuItem(label));
+        return this.clickAndWaitForResponse({responseUrl: responseUrl, target: this.menuItem(label)});
     }
 
     public async clickNavbarOptionLabel(languagecode: string): Promise<Response> {
-        return this.clickAndWaitForResponse(`/${languagecode}?_rsc=`, this.navbarOptionLabel(languagecode));
+        return this.clickAndWaitForResponse({responseUrl: `/${languagecode}?_rsc=`, target: this.navbarOptionLabel(languagecode)});
     }
 
     public menuItem(label: string): Locator {
@@ -43,10 +43,10 @@ export default class HeaderComponent {
         return this.page.locator(`[data-test="navbar-language-label-${label}"]`);
     }
 
-    private async clickAndWaitForResponse(responseUrl: string, clickable: Locator): Promise<Response> {
+    private async clickAndWaitForResponse(options: {responseUrl: string, target: Locator}): Promise<Response> {
         const [response] = await Promise.all([
-            this.page.waitForResponse((response) => response.url().includes(responseUrl) && response.request().method() === 'GET'),
-            clickable.click(),
+            this.page.waitForResponse((response) => response.url().includes(options.responseUrl) && response.request().method() === 'GET'),
+            options.target.click(),
         ]);
 
         return response;
