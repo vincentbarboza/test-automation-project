@@ -3,72 +3,54 @@ import { expect } from '@playwright/test';
 import { test } from '../../../fixture/base';
 import testDataLoader from '@vincent/test-data-loader';
 import HeaderItemsTestData from '../../../lib/type/home/header/headerItesmsTestData';
-
-const selectors = {
-    logo: '[data-test="navbar-logo"]',
-    logoButton: '[data-test="navbar-logo-button"]',
-    languageLabel: '[data-test="navbar-language-label"]',
-    languageButton: (label: string) => `[data-test="navbar-language-button-${label}"]`,
-    menuItem: (label: string) => `[data-test="navbar-${label}-button"]`,
-    navbarOptionLabel: (label: string) => `[data-test="navbar-${label}-option-label"]`,
-    navbarlanguageLabel: (label: string) => `[data-test="navbar-language-label-${label}"]`,
-    navbarOptionSelected: (label: string) => `[data-test="navbar-${label}-option-selected"]`,
-};
+import HomePage from '../../../lib/patterns/page/homePage';
+import HeaderComponent from '../../../lib/patterns/component/headerComponent';
 
 const headerItesmsTestData = testDataLoader<HeaderItemsTestData>('/home/header/headerItems');
 
 test.describe('Header items', () => {
     test.beforeEach(async ({ page }) => {
-        await page.goto('/');
+        const homePage = new HomePage(page);
+        await homePage.goto();
     });
 
     test('Check the navbar logo', async ({ page }) => {
-        await expect(page.locator(selectors.logo)).toBeVisible();
+        const headerComponent = new HeaderComponent(page);
+        await expect(headerComponent.logo).toBeVisible();
 
-        const [response] = await Promise.all([
-            page.waitForResponse((response) => response.url().includes(`/${headerItesmsTestData.languageCode}`) && response.request().method() === 'GET'),
-            page.locator(selectors.logoButton).click(),
-        ]);
-
+        const response = await headerComponent.clickLogoButton(headerItesmsTestData.languageCode);
         expect(response.status()).toBe(200);
     });
 
     for (const menuItem of headerItesmsTestData.menuItems) {
         test(`Check the navbar menu item: ${menuItem.label}`, async ({ page }) => {
-            await expect(page.locator(selectors.menuItem(menuItem.label))).toHaveText(menuItem.label);
+            const headerComponent = new HeaderComponent(page);
+            await expect(headerComponent.menuItem(menuItem.label)).toHaveText(menuItem.label);
 
-            const [response] = await Promise.all([
-                page.waitForResponse((response) => response.url().includes(menuItem.url) && response.request().method() === 'GET'),
-                page.locator(selectors.menuItem(menuItem.label)).click(),
-            ]);
-
+            const response = await headerComponent.clickMenuItemButton(menuItem.url, menuItem.label);
             expect(response.status()).toBe(200);
         });
     }
 
     test('Check the navbar language picker', async ({ page }) => {
-        await expect(page.locator(selectors.navbarlanguageLabel(headerItesmsTestData.languageName))).toHaveText(headerItesmsTestData.languageName);
-        await page.locator(selectors.languageButton(headerItesmsTestData.languageName)).click();
+        const headerComponent = new HeaderComponent(page);
+        await expect(headerComponent.languageButton(headerItesmsTestData.languageName)).toHaveText(headerItesmsTestData.languageName);
 
-        const siteLanguageOption = page.locator(selectors.navbarOptionSelected(headerItesmsTestData.languageCode));
-        await expect(siteLanguageOption).toHaveText(headerItesmsTestData.optionSelectedText);
+        await headerComponent.languageButton(headerItesmsTestData.languageName).click();
+        await expect(headerComponent.navbarOptionSelected(headerItesmsTestData.languageCode)).toHaveText(headerItesmsTestData.optionSelectedText);
 
         for (const language of headerItesmsTestData.availableLanguages) {
-            const navbarLabel = page.locator(selectors.navbarOptionLabel(language.code));
-            await expect(navbarLabel).toHaveText(language.name);
+            await expect(headerComponent.navbarOptionLabel(language.code)).toHaveText(language.name);
 
-            const [response] = await Promise.all([
-                page.waitForResponse((response) => response.url().includes(`/${language.code}?_rsc=`) && response.request().method() === 'GET'),
-                page.locator(selectors.navbarOptionLabel(language.code)).click(),
-            ]);
+            const response = await headerComponent.clickNavbarOptionLabel(language.code);
 
             expect(response.status()).toBe(200);
 
 
-            await expect(page.locator(selectors.navbarlanguageLabel(language.name))).toBeVisible();
+            await expect(headerComponent.navbarLanguageLabel(language.name)).toBeVisible();
 
-            await page.locator(selectors.languageButton(language.name)).click();
-            await expect(page.locator(selectors.navbarOptionSelected(language.code))).toHaveText(headerItesmsTestData.optionSelectedText);
+            await headerComponent.languageButton(language.name).click();
+            await expect(headerComponent.navbarOptionSelected(language.code)).toHaveText(headerItesmsTestData.optionSelectedText);
         }
     });
 });

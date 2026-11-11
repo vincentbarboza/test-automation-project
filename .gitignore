@@ -1,6 +1,7 @@
 ﻿node_modules/
 .next/
 agent-rules.md
+.vscode/
 /tests/api/env.api
 .env.local
 
