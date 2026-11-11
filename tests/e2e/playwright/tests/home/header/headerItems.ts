@@ -1,4 +1,3 @@
-// This test is still under construction; page object and component abstractions are pending implementation
 import { expect } from '@playwright/test';
 import { test } from '../../../fixture/base';
 import testDataLoader from '@vincent/test-data-loader';
