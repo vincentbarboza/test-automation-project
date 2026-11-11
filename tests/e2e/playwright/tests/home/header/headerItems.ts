@@ -42,9 +42,7 @@ test.describe('Header items', () => {
             await expect(headerComponent.navbarOptionLabel(language.code)).toHaveText(language.name);
 
             const response = await headerComponent.clickNavbarOptionLabel(language.code);
-
             expect(response.status()).toBe(200);
-
 
             await expect(headerComponent.navbarLanguageLabel(language.name)).toBeVisible();
 
